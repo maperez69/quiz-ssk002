@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Evaluaciones interactivas del Taller de Habilidades Directivas SSK002.">
+<title>SSK002 · Evaluaciones Interactivas</title>
+<style>
+:root{
+  --azul:#004B8D;--rojo:#CE1126;--dorado:#A68A56;--fondo:#F5F7FA;
+  --blanco:#FFFFFF;--texto:#1F2933;--muted:#667085;--borde:#DDE3EA;
+  --verde:#227447;--radio:18px;--sombra:0 10px 30px rgba(19,33,49,.08)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--fondo);color:var(--texto);line-height:1.5}
+.topbar{height:7px;background:linear-gradient(90deg,var(--azul) 0 68%,var(--rojo) 68% 84%,var(--dorado) 84% 100%)}
+.page{width:min(1080px,calc(100% - 32px));margin:0 auto;padding:44px 0 56px}
+.hero{background:var(--blanco);border:1px solid var(--borde);border-radius:24px;box-shadow:var(--sombra);padding:34px;display:grid;grid-template-columns:1.5fr .8fr;gap:28px;align-items:center}
+.eyebrow{margin:0 0 8px;color:var(--azul);font-size:.86rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+h1{margin:0;font-size:clamp(2rem,4vw,3.35rem);line-height:1.08}
+.subtitle{margin:16px 0 0;max-width:720px;color:var(--muted);font-size:1.05rem}
+.course-badge{justify-self:end;width:100%;max-width:270px;border-radius:var(--radio);background:#EEF4F9;border:1px solid #D5E4F0;padding:22px}
+.course-badge strong{display:block;color:var(--azul);font-size:1.45rem;margin-bottom:6px}
+.course-badge span{display:block;color:var(--muted);font-size:.92rem}
+.section-title{margin:38px 0 16px;font-size:1.3rem}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{background:var(--blanco);border:1px solid var(--borde);border-radius:var(--radio);padding:24px;box-shadow:0 7px 20px rgba(19,33,49,.05);display:flex;flex-direction:column;min-height:280px}
+.card.available{border-top:5px solid var(--azul)}
+.card.coming{border-top:5px solid var(--dorado)}
+.tag{display:inline-flex;width:fit-content;border-radius:999px;padding:6px 10px;font-size:.78rem;font-weight:700;margin-bottom:14px}
+.tag.available{background:#E8F4EE;color:var(--verde)}
+.tag.coming{background:#F5F0E7;color:#7D6539}
+.card h2{margin:0;font-size:1.35rem;line-height:1.25}
+.card p{margin:12px 0 0;color:var(--muted)}
+.meta{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:7px;font-size:.92rem}
+.meta li::before{content:"•";color:var(--dorado);font-weight:700;margin-right:8px}
+.actions{margin-top:auto;padding-top:22px}
+.btn{display:inline-flex;min-height:44px;align-items:center;justify-content:center;border-radius:12px;padding:11px 16px;text-decoration:none;font-weight:700;border:1px solid transparent}
+.btn-primary{background:var(--azul);color:#fff}
+.btn-disabled{background:#EEF1F4;color:#8A94A3;border-color:var(--borde);cursor:not-allowed}
+.notice{margin-top:28px;border-left:4px solid var(--rojo);background:var(--blanco);border-radius:12px;padding:16px 18px;color:var(--muted);border-top:1px solid var(--borde);border-right:1px solid var(--borde);border-bottom:1px solid var(--borde)}
+footer{margin-top:34px;text-align:center;color:var(--muted);font-size:.84rem}
+@media(max-width:760px){.page{width:min(100% - 22px,1080px);padding-top:24px}.hero{grid-template-columns:1fr;padding:24px}.course-badge{justify-self:stretch;max-width:none}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar" aria-hidden="true"></div>
+<main class="page">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Universidad Panamericana · Otoño 2026</p>
+      <h1>Evaluaciones Interactivas</h1>
+      <p class="subtitle">Espacio de verificación y práctica del Taller de Habilidades Directivas. Cada evaluación puede presentar preguntas y opciones en orden aleatorio.</p>
+    </div>
+    <aside class="course-badge" aria-label="Información del curso">
+      <strong>SSK002</strong>
+      <span>Taller de Habilidades Directivas</span>
+      <span>Profesor: Marco Antonio Pérez De Acha</span>
+    </aside>
+  </section>
+
+  <h2 class="section-title">Evaluaciones disponibles</h2>
+
+  <section class="grid" aria-label="Listado de evaluaciones">
+    <article class="card available">
+      <span class="tag available">Disponible</span>
+      <h2>Verificación · Perfil + The Founder</h2>
+      <p>Revisión de las actividades de Perfil Directivo Emergente y análisis de decisiones a partir de cinco escenas de <em>The Founder</em>.</p>
+      <ul class="meta">
+        <li>10 preguntas aleatorias</li>
+        <li>1 pregunta bonus</li>
+        <li>Una pregunta por pantalla</li>
+        <li>Retroalimentación inmediata</li>
+      </ul>
+      <div class="actions"><a class="btn btn-primary" href="perfil-founder.html">Iniciar evaluación</a></div>
+    </article>
+
+    <article class="card coming">
+      <span class="tag coming">Próximamente</span>
+      <h2>Liderazgo</h2>
+      <p>Verificación de conceptos y aplicación sobre dirección, liderazgo, poder, rasgos, conductas y enfoques situacionales.</p>
+      <ul class="meta">
+        <li>Banco aleatorio de preguntas</li>
+        <li>Aplicación a situaciones directivas</li>
+        <li>Resultados individuales</li>
+      </ul>
+      <div class="actions"><span class="btn btn-disabled" aria-disabled="true">Aún no disponible</span></div>
+    </article>
+  </section>
+
+  <div class="notice">
+    <strong>Importante:</strong> utiliza tu nombre completo y matrícula al iniciar cada evaluación. Las evaluaciones están diseñadas para ser contestadas de manera individual.
+  </div>
+
+  <footer>Taller de Habilidades Directivas · SSK002 · Universidad Panamericana</footer>
+</main>
+</body>
+</html>
