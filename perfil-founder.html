@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verificación interactiva Perfil Directivo + The Founder · SSK002">
+<title>SSK002 · Perfil + The Founder</title>
+<style>
+:root{
+  --azul:#004B8D;--rojo:#CE1126;--dorado:#A68A56;--fondo:#F5F7FA;
+  --blanco:#FFFFFF;--texto:#1F2933;--muted:#667085;--borde:#DDE3EA;
+  --verde:#227447;--verde-bg:#E8F4EE;--rojo-bg:#FDEBEC;--panel:#EEF3F7;
+  --sombra:0 10px 30px rgba(19,33,49,.08);--radio:18px
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--fondo);color:var(--texto);line-height:1.5}
+button,input{font:inherit}
+.topbar{height:7px;background:linear-gradient(90deg,var(--azul) 0 68%,var(--rojo) 68% 84%,var(--dorado) 84% 100%)}
+.page{width:min(860px,calc(100% - 28px));margin:0 auto;padding:28px 0 48px}
+.nav{margin-bottom:18px}
+.back{color:var(--azul);font-size:.92rem;font-weight:700;text-decoration:none}
+.shell{background:var(--blanco);border:1px solid var(--borde);border-radius:24px;box-shadow:var(--sombra);padding:28px}
+.eyebrow{margin:0 0 6px;color:var(--azul);font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+h1{margin:0;font-size:clamp(1.8rem,5vw,2.65rem);line-height:1.1}
+.lead{color:var(--muted);margin:12px 0 0}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.badge{border:1px solid var(--borde);border-radius:999px;padding:5px 10px;font-size:.78rem;font-weight:700;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+label .lbl{display:block;margin-bottom:6px;font-size:.9rem;font-weight:700}
+input[type=text]{width:100%;min-height:46px;border:1px solid var(--borde);border-radius:12px;padding:10px 12px;color:var(--texto);background:white;outline:none}
+input[type=text]:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,75,141,.12)}
+.btn{border:0;border-radius:12px;min-height:46px;padding:11px 16px;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--azul);color:white;width:100%;margin-top:18px}
+.btn-secondary{background:white;color:var(--azul);border:1px solid var(--borde);width:100%;margin-top:10px}
+.error{display:none;color:var(--rojo);font-weight:700;font-size:.9rem;margin-top:10px}
+.hidden{display:none!important}
+.progress-row{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:2px 0 8px;color:var(--muted);font-size:.88rem;font-weight:700}
+.progress{height:8px;border-radius:999px;background:#E8EDF2;overflow:hidden}
+.progress > div{height:100%;background:var(--azul);width:0%;transition:width .2s ease}
+.qcard{margin-top:20px}
+.qnum{font-size:.84rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--muted)}
+.qcat{display:inline-block;margin-left:8px;background:#EEF4F9;color:var(--azul);border-radius:999px;padding:3px 8px;font-size:.75rem}
+.bonus{background:#F5F0E7;color:#7D6539}
+.qtext{font-size:1.3rem;line-height:1.35;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{display:flex;align-items:flex-start;gap:11px;border:1px solid var(--borde);border-radius:13px;padding:13px;cursor:pointer;background:white}
+.option:hover{border-color:#B9C7D4}
+.option input{margin-top:3px;width:18px;height:18px;accent-color:var(--azul)}
+.option.disabled{cursor:default;opacity:.95}
+.feedback{display:none;margin-top:18px;border:1px solid var(--borde);border-radius:14px;padding:15px}
+.feedback.ok{display:block;background:var(--verde-bg);border-color:#CBE7D6}
+.feedback.bad{display:block;background:var(--rojo-bg);border-color:#F1C8CD}
+.feedback-title{font-size:1.05rem;font-weight:800}
+.feedback-answer{margin-top:8px;font-weight:700}
+.feedback-exp{margin-top:8px;color:#3D4752}
+.running{margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,.08);font-size:.88rem;font-weight:700;color:var(--muted)}
+.results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.metric{background:var(--panel);border-radius:14px;padding:16px}
+.metric span{display:block;color:var(--muted);font-size:.82rem}
+.metric strong{display:block;margin-top:4px;font-size:1.7rem}
+.final{margin-top:18px;border:1px solid var(--borde);border-radius:14px;padding:16px;text-align:center;font-size:1.2rem;font-weight:800}
+.note{margin-top:20px;color:var(--muted);font-size:.85rem}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:24px}
+@media(max-width:640px){
+  .page{width:min(100% - 18px,860px);padding-top:18px}
+  .shell{padding:20px}
+  .grid2{grid-template-columns:1fr}
+  .results{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<main class="page">
+  <nav class="nav"><a class="back" href="index.html">← Volver a evaluaciones</a></nav>
+
+  <section id="startScreen" class="shell">
+    <p class="eyebrow">Taller de Habilidades Directivas · SSK002</p>
+    <h1>Verificación · Perfil + The Founder</h1>
+    <p class="lead">Actividad individual de verificación sobre las actividades trabajadas en clase.</p>
+
+    <div class="badges">
+      <span class="badge">10 preguntas</span>
+      <span class="badge">1 bonus</span>
+      <span class="badge">Orden aleatorio</span>
+      <span class="badge">Sin retroceso</span>
+    </div>
+
+    <div class="grid2">
+      <label>
+        <span class="lbl">Nombre completo</span>
+        <input id="studentName" type="text" autocomplete="name" placeholder="Nombre y apellidos">
+      </label>
+      <label>
+        <span class="lbl">Matrícula</span>
+        <input id="studentId" type="text" inputmode="numeric" placeholder="Ej. 0258271">
+      </label>
+    </div>
+
+    <p id="startError" class="error">Captura tu nombre completo y matrícula antes de iniciar.</p>
+    <button id="startBtn" class="btn btn-primary" type="button">Iniciar verificación</button>
+
+    <p class="note">Cada intento genera una combinación distinta: 4 preguntas sobre Perfil Directivo, 6 sobre <em>The Founder</em> y toma de decisiones, más 1 bonus integrador.</p>
+  </section>
+
+  <section id="quizScreen" class="shell hidden">
+    <div class="progress-row">
+      <span id="progressText">Pregunta 1 de 10</span>
+      <span id="categoryText">Perfil Directivo</span>
+    </div>
+    <div class="progress"><div id="progressBar"></div></div>
+
+    <div class="qcard">
+      <div>
+        <span id="questionNumber" class="qnum">Pregunta 1</span>
+        <span id="bonusBadge" class="qcat bonus hidden">BONUS</span>
+      </div>
+
+      <h2 id="questionText" class="qtext"></h2>
+      <form id="answerForm" class="options"></form>
+
+      <p id="answerError" class="error">Selecciona una respuesta.</p>
+
+      <div id="feedbackBox" class="feedback">
+        <div id="feedbackGrade" class="feedback-title"></div>
+        <div id="feedbackAnswer" class="feedback-answer"></div>
+        <div id="feedbackExplanation" class="feedback-exp"></div>
+        <div id="runningScore" class="running"></div>
+      </div>
+
+      <button id="checkBtn" class="btn btn-primary" type="button">Calificar respuesta</button>
+      <button id="nextBtn" class="btn btn-secondary hidden" type="button">Siguiente pregunta</button>
+    </div>
+  </section>
+
+  <section id="resultScreen" class="shell hidden">
+    <p class="eyebrow">Verificación terminada</p>
+    <h1 id="resultName"></h1>
+    <p class="lead">Resultado del intento.</p>
+
+    <div class="results">
+      <div class="metric"><span>Aciertos</span><strong id="scoreValue">0/10</strong></div>
+      <div class="metric"><span>Bonus</span><strong id="bonusValue">—</strong></div>
+      <div class="metric"><span>Tiempo</span><strong id="timeValue">0:00</strong></div>
+    </div>
+
+    <div id="percentValue" class="final"></div>
+
+    <button id="restartBtn" class="btn btn-secondary" type="button">Probar otro intento</button>
+    <a class="btn btn-secondary" style="display:flex;text-decoration:none;justify-content:center;align-items:center" href="index.html">Volver a evaluaciones</a>
+
+    <p class="note">Esta primera versión funciona completamente en el navegador. Todavía no envía ni almacena resultados en una base externa.</p>
+  </section>
+
+  <footer>Universidad Panamericana · Taller de Habilidades Directivas · Otoño 2026</footer>
+</main>
+
+<script>
+(() => {
+  const banks = {
+    perfil: [
+      {q:"¿Qué convierte mejor una intención de desarrollo en una conducta observable?",a:"Definir qué haré distinto y en qué situación",e:"Una intención se vuelve trabajable cuando se traduce en una acción concreta que puede observarse en una situación real.",o:["Definir qué haré distinto y en qué situación","Describir cómo me gustaría sentirme","Elegir una palabra que me represente","Esperar a que otra persona note el cambio"]},
+      {q:"¿Cuál sería la mejor evidencia de que alguien está mejorando su comunicación?",a:"Explica una decisión con claridad y verifica que el otro la entendió",e:"La evidencia debe aparecer en una conducta concreta, no solo en una percepción interna.",o:["Explica una decisión con claridad y verifica que el otro la entendió","Dice que ahora se siente más seguro","Considera que comunica mejor","Escribe que quiere mejorar su comunicación"]},
+      {q:"¿Cuál de estas metas está mejor formulada como conducta observable?",a:"Dar instrucciones claras y verificar acuerdos sin microgestionar",e:"La formulación describe una conducta que puede verse y evaluarse en situaciones reales.",o:["Dar instrucciones claras y verificar acuerdos sin microgestionar","Ser mejor líder","Tener más confianza","Mejorar mi personalidad"]},
+      {q:"¿Qué pregunta ayuda más a verificar si un compromiso de mejora está bien formulado?",a:"¿Qué tendría que observar otra persona para notar el cambio?",e:"La pregunta obliga a traducir el propósito personal en evidencia observable.",o:["¿Qué tendría que observar otra persona para notar el cambio?","¿Me gusta cómo quedó escrito?","¿Es suficientemente ambicioso?","¿Suena profesional?"]},
+      {q:"Si alguien escribe “quiero participar más”, ¿qué falta para convertirlo en una meta útil?",a:"Definir una conducta específica y observable",e:"La intención necesita traducirse en una acción concreta y verificable.",o:["Definir una conducta específica y observable","Hacer la frase más larga","Usar vocabulario más formal","Agregar una opinión sobre sí mismo"]},
+      {q:"¿Qué distingue mejor una autopercepción de una evidencia?",a:"La evidencia se apoya en una conducta o hecho observable",e:"La autopercepción expresa cómo la persona se ve; la evidencia muestra algo que ocurrió o puede observarse.",o:["La evidencia se apoya en una conducta o hecho observable","La autopercepción siempre es incorrecta","La evidencia es una emoción fuerte","La autopercepción siempre proviene de otras personas"]},
+      {q:"¿Cuál sería un indicador observable adecuado para una meta de manejar mejor conflictos?",a:"Sostener una conversación difícil sin atacar ni evadir",e:"El indicador describe una acción concreta que permite observar avance.",o:["Sostener una conversación difícil sin atacar ni evadir","Sentirme menos incómodo","Tener una personalidad más tranquila","Evitar todos los conflictos"]},
+      {q:"¿Qué debe ocurrir después de identificar un área de mejora?",a:"Elegir una conducta concreta para practicar",e:"Identificar un área de mejora es diagnóstico; el desarrollo empieza cuando se decide qué conducta practicar.",o:["Elegir una conducta concreta para practicar","Esperar a que desaparezca sola","Buscar una etiqueta personal","Compararse con todos los demás"]},
+      {q:"¿Cuál de estas evidencias es más útil para comprobar un cambio de conducta?",a:"Una acción específica realizada en una situación concreta",e:"La evidencia más útil permite observar qué cambió en la conducta y en qué contexto ocurrió.",o:["Una acción específica realizada en una situación concreta","Una intención escrita al inicio del curso","Una opinión general sobre uno mismo","Una frase motivacional"]},
+      {q:"En la dinámica en parejas, ¿qué función cumplía principalmente el compañero?",a:"Ayudar a precisar la reflexión mediante preguntas",e:"La pareja funcionaba como espejo: escuchaba, preguntaba y ayudaba a aterrizar una conducta observable, sin juzgar ni resolver por la otra persona.",o:["Ayudar a precisar la reflexión mediante preguntas","Calificar la personalidad del compañero","Decidir qué meta debía escoger el otro","Comparar quién tenía mejor perfil"]}
+    ],
+    founder: [
+      {q:"En el Speedee System, ¿qué práctica permitió aprender antes de escalar?",a:"Probar el sistema, observar fallas y ajustarlo",e:"El prototipo permitió implementar a pequeña escala, revisar y corregir antes de comprometer más recursos.",o:["Probar el sistema, observar fallas y ajustarlo","Abrir muchas sucursales de inmediato","Evitar cualquier cambio al diseño inicial","Depender únicamente de la intuición"]},
+      {q:"En el caso de las franquicias, ¿qué muestra que una buena idea puede fallar en la implementación?",a:"Que el perfil de quien opera la franquicia afecta los estándares",e:"La decisión de crecer no basta; también importa quién ejecuta y cómo sostiene el modelo.",o:["Que el perfil de quien opera la franquicia afecta los estándares","Que toda franquicia produce exactamente el mismo resultado","Que crecer elimina la necesidad de supervisión","Que el contrato sustituye completamente a la ejecución"]},
+      {q:"En el conflicto de los shakes, ¿qué factor además del costo era relevante?",a:"La calidad, la autoridad y la confianza entre las partes",e:"Reducir costos era solo una parte del problema; también estaban en juego estándares, derechos de decisión y relación entre socios.",o:["La calidad, la autoridad y la confianza entre las partes","El color del restaurante","La publicidad nacional","El número de cajas registradoras"]},
+      {q:"¿Qué cambia cuando Ray adopta el modelo inmobiliario?",a:"La definición del negocio y la fuente de control",e:"La reformulación cambia la lógica del negocio: el control sobre los terrenos modifica poder, flujo y capacidad de expansión.",o:["La definición del negocio y la fuente de control","El tiempo de cocción de las hamburguesas","El uniforme de los empleados","El nombre del primer restaurante"]},
+      {q:"¿Qué enseñanza deja la negociación final con los hermanos?",a:"Cerrar un acuerdo no garantiza que el proceso haya sido justo o bien implementado",e:"Un resultado final puede parecer exitoso y aun contener problemas de confianza, derechos o formalización.",o:["Cerrar un acuerdo no garantiza que el proceso haya sido justo o bien implementado","Todo acuerdo firmado elimina cualquier conflicto futuro","La rapidez del acuerdo demuestra su calidad","La rentabilidad vuelve irrelevante la confianza"]},
+      {q:"¿Qué pregunta pertenece a la etapa de definición del problema?",a:"¿Qué estamos tratando realmente de resolver?",e:"La primera etapa busca identificar el problema real antes de saltar a soluciones.",o:["¿Qué estamos tratando realmente de resolver?","¿Quién va a implementar mañana?","¿Qué ocurrió después?","¿Qué alternativa elegimos ya?"]},
+      {q:"¿Qué pregunta corresponde a factores de decisión?",a:"¿Qué debe cumplir una buena solución?",e:"Los factores permiten definir qué condiciones deben usarse para comparar las alternativas.",o:["¿Qué debe cumplir una buena solución?","¿Qué problema apareció después?","¿Quién tiene más autoridad?","¿Qué ocurrió al final?"]},
+      {q:"¿Qué función cumple generar alternativas?",a:"Ampliar las rutas posibles antes de evaluar",e:"Generar alternativas evita confundir la primera idea con la única opción disponible.",o:["Ampliar las rutas posibles antes de evaluar","Justificar la primera solución","Eliminar la necesidad de comparar","Escoger de inmediato"]},
+      {q:"¿Qué pregunta corresponde mejor a consecuencias?",a:"¿Qué podemos ganar, arriesgar y afectar con cada opción?",e:"Evaluar consecuencias implica revisar beneficios, costos, riesgos, afectados y reversibilidad.",o:["¿Qué podemos ganar, arriesgar y afectar con cada opción?","¿Quién debe llenar el formato?","¿Cómo se llama el problema?","¿Qué opción apareció primero?"]},
+      {q:"¿Qué hace que una decisión todavía esté incompleta después de elegir?",a:"Falta definir cómo se implementará",e:"Elegir es solo una etapa. Una decisión necesita responsables, acciones, tiempos y recursos para convertirse en realidad.",o:["Falta definir cómo se implementará","Falta cambiar el nombre del problema","Falta eliminar todas las alternativas","Falta justificar la intuición"]},
+      {q:"¿Para qué sirve la revisión después de implementar?",a:"Comparar lo esperado con lo ocurrido y aprender",e:"La revisión permite identificar desviaciones, aprender y corregir.",o:["Comparar lo esperado con lo ocurrido y aprender","Demostrar que la decisión original nunca estuvo equivocada","Evitar cualquier ajuste posterior","Eliminar la incertidumbre futura"]},
+      {q:"¿Qué idea resume mejor el análisis de las cinco escenas de The Founder?",a:"La calidad de una decisión depende del proceso, no solo del resultado",e:"Las escenas muestran que problema, factores, alternativas, consecuencias, implementación y revisión importan tanto como el resultado final.",o:["La calidad de una decisión depende del proceso, no solo del resultado","Una decisión es buena si produce dinero","La autoridad garantiza una buena implementación","La primera solución suele ser la mejor"]},
+      {q:"¿Qué escena muestra con mayor claridad el valor de probar barato antes de comprometer más recursos?",a:"El desarrollo del Speedee System",e:"Los prototipos y ensayos permitieron corregir el sistema antes de implementarlo plenamente.",o:["El desarrollo del Speedee System","La negociación final","El conflicto por los shakes","La compra de terrenos"]},
+      {q:"¿Qué escena muestra con mayor claridad que una decisión puede generar un problema por la forma en que se implementa?",a:"El cambio de shakes",e:"El cambio tenía una lógica de costos, pero la forma de imponerlo generó problemas de autoridad, confianza y coordinación.",o:["El cambio de shakes","El diseño inicial del menú","La primera apertura del restaurante","La elección del nombre de la empresa"]},
+      {q:"En franquicias, ¿qué factor terminó siendo especialmente importante?",a:"El compromiso y perfil de quien operaba cada unidad",e:"La experiencia mostró que no todos los franquiciatarios protegían los estándares con el mismo compromiso.",o:["El compromiso y perfil de quien operaba cada unidad","El tamaño de las oficinas corporativas","El color de los anuncios","El número de productos en publicidad"]},
+      {q:"¿Qué error representa mejor brincar del problema a la solución?",a:"Asumir que “ventas bajas” significa automáticamente “hay que vender más”",e:"El síntoma visible puede tener causas distintas; decidir exige definir el problema antes de proponer una respuesta.",o:["Asumir que “ventas bajas” significa automáticamente “hay que vender más”","Preguntar qué está causando la situación","Comparar varias alternativas","Revisar riesgos antes de implementar"]},
+      {q:"¿En qué etapa del proceso se pregunta quién hará qué, cuándo y con qué recursos?",a:"Implementación",e:"Implementar convierte una elección en responsabilidades, acciones, tiempos y recursos.",o:["Implementación","Definición del problema","Generación de alternativas","Revisión"]},
+      {q:"¿Cuál de estas afirmaciones describe mejor la reversibilidad?",a:"Qué tan fácil es corregir o deshacer una decisión si resulta equivocada",e:"La reversibilidad ayuda a valorar el nivel de riesgo y el cuidado requerido antes de comprometerse.",o:["Qué tan fácil es corregir o deshacer una decisión si resulta equivocada","Qué tan rápido se tomó la decisión","Cuántas personas participaron","Qué tan rentable fue el resultado"]},
+      {q:"¿Qué debe ocurrir antes de comparar alternativas de manera útil?",a:"Definir qué factores importan para una buena solución",e:"Sin factores explícitos, la comparación puede depender solo de preferencias o intuiciones no declaradas.",o:["Definir qué factores importan para una buena solución","Implementar una alternativa","Cerrar el acuerdo final","Revisar resultados pasados"]},
+      {q:"¿Por qué un buen resultado no prueba necesariamente que el proceso de decisión fue bueno?",a:"Porque también pueden intervenir suerte, incertidumbre y factores externos",e:"La calidad del proceso debe evaluarse por cómo se definió, comparó, eligió e implementó, no únicamente por el desenlace.",o:["Porque también pueden intervenir suerte, incertidumbre y factores externos","Porque los resultados nunca importan","Porque toda mala decisión produce un buen resultado","Porque revisar elimina los riesgos"]}
+    ],
+    bonus: [
+      {q:"¿Qué tienen en común la actividad de Perfil Directivo y el análisis de The Founder?",a:"Ambas convierten información en una decisión, conducta, implementación y revisión",e:"En los dos ejercicios se pasa del diagnóstico o información a una conducta elegida, su ejecución y la posibilidad de revisar lo ocurrido.",o:["Ambas convierten información en una decisión, conducta, implementación y revisión","Ambas buscan describir personalidad sin actuar","Ambas eliminan la necesidad de evaluar consecuencias","Ambas dependen principalmente de memorizar conceptos"]},
+      {q:"Si alguien identifica un área de mejora, practica una conducta y después revisa si funcionó, ¿qué lógica está aplicando?",a:"Decidir, implementar y revisar",e:"El desarrollo personal también puede entenderse como un ciclo de decisión y aprendizaje.",o:["Decidir, implementar y revisar","Describir, memorizar y repetir","Evitar, delegar y justificar","Observar, esperar y reaccionar"]},
+      {q:"¿Qué frase conecta mejor las dos actividades?",a:"Conocer algo sirve cuando cambia lo que decides hacer",e:"El perfil aporta información sobre uno mismo y The Founder permite analizar decisiones; en ambos casos el aprendizaje se concreta cuando influye en una conducta.",o:["Conocer algo sirve cuando cambia lo que decides hacer","Una buena intención garantiza buenos resultados","Toda decisión debe ser rápida","La reflexión sustituye a la acción"]},
+      {q:"¿Qué convierte una reflexión en aprendizaje directivo?",a:"Usarla para decidir una conducta, ponerla en práctica y revisar lo ocurrido",e:"La reflexión cobra valor cuando se transforma en acción observable y aprendizaje posterior.",o:["Usarla para decidir una conducta, ponerla en práctica y revisar lo ocurrido","Escribirla con más detalle","Compartirla con todo el grupo","Memorizarla para el examen"]}
+    ]
+  };
+
+  const $ = id => document.getElementById(id);
+  const quota = {perfil:4, founder:6};
+  let questions=[], current=0, score=0, bonusCorrect=false, startTime=0, student={}, answered=false;
+
+  function shuffle(arr){
+    const copy=[...arr];
+    for(let i=copy.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [copy[i],copy[j]]=[copy[j],copy[i]];
+    }
+    return copy;
+  }
+
+  function buildQuiz(){
+    questions=[];
+    Object.entries(quota).forEach(([cat,count])=>{
+      shuffle(banks[cat]).slice(0,count).forEach(item=>questions.push({...item,cat,bonus:false}));
+    });
+    questions=shuffle(questions);
+    questions.push({...shuffle(banks.bonus)[0],cat:"bonus",bonus:true});
+    current=0; score=0; bonusCorrect=false; answered=false;
+  }
+
+  function showOnly(id){
+    ["startScreen","quizScreen","resultScreen"].forEach(x=>$(x).classList.toggle("hidden",x!==id));
+  }
+
+  function renderQuestion(){
+    answered=false;
+    const item=questions[current];
+    const isBonus=item.bonus;
+    const num=Math.min(current+1,10);
+
+    $("progressText").textContent=isBonus?"Pregunta bonus":`Pregunta ${num} de 10`;
+    $("categoryText").textContent=isBonus?"Integración":(item.cat==="perfil"?"Perfil Directivo":"The Founder · decisiones");
+    $("questionNumber").textContent=isBonus?"Pregunta BONUS":`Pregunta ${num}`;
+    $("bonusBadge").classList.toggle("hidden",!isBonus);
+    $("progressBar").style.width=`${Math.min(100,(current/11)*100)}%`;
+    $("questionText").textContent=item.q;
+
+    $("feedbackBox").className="feedback";
+    $("checkBtn").classList.remove("hidden");
+    $("nextBtn").classList.add("hidden");
+    $("answerError").style.display="none";
+
+    const form=$("answerForm");
+    form.innerHTML="";
+    shuffle(item.o).forEach(opt=>{
+      const label=document.createElement("label");
+      label.className="option";
+
+      const input=document.createElement("input");
+      input.type="radio"; input.name="answer"; input.value=opt;
+
+      const span=document.createElement("span");
+      span.textContent=opt;
+
+      label.append(input,span);
+      form.appendChild(label);
+    });
+  }
+
+  function grade(){
+    if(answered) return;
+    const picked=document.querySelector('input[name="answer"]:checked');
+    if(!picked){
+      $("answerError").style.display="block";
+      return;
+    }
+
+    answered=true;
+    const item=questions[current];
+    const correct=picked.value===item.a;
+
+    if(item.bonus) bonusCorrect=correct;
+    else if(correct) score++;
+
+    document.querySelectorAll('input[name="answer"]').forEach(input=>input.disabled=true);
+    document.querySelectorAll(".option").forEach(label=>label.classList.add("disabled"));
+
+    $("feedbackGrade").textContent=correct?"✓ Respuesta correcta":"✕ Respuesta incorrecta";
+    $("feedbackAnswer").textContent=`Respuesta correcta: ${item.a}`;
+    $("feedbackExplanation").textContent=item.e;
+    $("runningScore").textContent=item.bonus
+      ? `Bonus: ${correct?"correcta":"incorrecta"}`
+      : `Acumulado: ${score} de ${current+1}`;
+
+    $("feedbackBox").className=`feedback ${correct?"ok":"bad"}`;
+    $("checkBtn").classList.add("hidden");
+    $("nextBtn").classList.remove("hidden");
+    $("nextBtn").textContent=item.bonus?"Ver resultado final":"Siguiente pregunta";
+  }
+
+  function next(){
+    if(!answered) return;
+    current++;
+    if(current>=questions.length) showResult();
+    else renderQuestion();
+  }
+
+  function showResult(){
+    showOnly("resultScreen");
+    const seconds=Math.max(0,Math.round((Date.now()-startTime)/1000));
+    const min=Math.floor(seconds/60);
+    const sec=String(seconds%60).padStart(2,"0");
+
+    $("resultName").textContent=student.name;
+    $("scoreValue").textContent=`${score}/10`;
+    $("bonusValue").textContent=bonusCorrect?"✓":"—";
+    $("timeValue").textContent=`${min}:${sec}`;
+    $("percentValue").textContent=`Calificación: ${score*10}/100${bonusCorrect?" + bonus":""}`;
+  }
+
+  $("startBtn").addEventListener("click",()=>{
+    const name=$("studentName").value.trim();
+    const id=$("studentId").value.trim();
+    if(name.length<5 || id.length<5){
+      $("startError").style.display="block";
+      return;
+    }
+    $("startError").style.display="none";
+    student={name,id};
+    buildQuiz();
+    startTime=Date.now();
+    showOnly("quizScreen");
+    renderQuestion();
+  });
+
+  $("checkBtn").addEventListener("click",grade);
+  $("nextBtn").addEventListener("click",next);
+  $("restartBtn").addEventListener("click",()=>{
+    $("studentName").value="";
+    $("studentId").value="";
+    showOnly("startScreen");
+  });
+})();
+</script>
+</body>
+</html>
