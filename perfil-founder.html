@@ -379,7 +379,11 @@ sendResults(seconds);
     const name=$("studentName").value.trim();
     const id=$("studentId").value.trim();
     const email=$("studentEmail").value.trim().toLowerCase();
-    if(name.length<5 || id.length<5){
+    if(
+  name.length<5 ||
+  id.length<5 ||
+  !email.endsWith("@up.edu.mx")
+){
       $("startError").style.display="block";
       return;
     }
