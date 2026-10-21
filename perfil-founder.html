@@ -227,7 +227,7 @@ let responses=[];
     });
     questions=shuffle(questions);
     questions.push({...shuffle(banks.bonus)[0],cat:"bonus",bonus:true});
-    current=0; score=0; bonusCorrect=false; answered=false;
+    current=0; score=0; bonusCorrect=false; answered=false;  responses=[];
   }
 
   function showOnly(id){
