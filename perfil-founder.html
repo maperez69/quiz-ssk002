@@ -202,7 +202,14 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:24px}
 
   const $ = id => document.getElementById(id);
   const quota = {perfil:4, founder:6};
-  let questions=[], current=0, score=0, bonusCorrect=false, startTime=0, student={}, answered=false;
+let questions=[];
+let current=0;
+let score=0;
+let bonusCorrect=false;
+let startTime=0;
+let student={};
+let answered=false;
+let responses=[];
 
   function shuffle(arr){
     const copy=[...arr];
