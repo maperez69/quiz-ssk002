@@ -280,7 +280,14 @@ let responses=[];
     answered=true;
     const item=questions[current];
     const correct=picked.value===item.a;
-
+responses.push({
+  numero: item.bonus ? "BONUS" : current + 1,
+  categoria: item.cat,
+  pregunta: item.q,
+  respuestaAlumno: picked.value,
+  respuestaCorrecta: item.a,
+  correcta: correct
+});
     if(item.bonus) bonusCorrect=correct;
     else if(correct) score++;
 
