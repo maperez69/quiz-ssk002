@@ -175,7 +175,29 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:24px}
 </main>
 
 <script>
-(() => {
+(() => {const RESULTS_URL =
+  "https://script.google.com/macros/s/AKfycbzhNnhKCHquGvykYgYDiBgCi4E3EUvMCWePuU4jfBZ-kAxiC73-YTJ5IK-RYPTYID9-Sw/exec";
+
+function sendResults(seconds) {
+  const payload = {
+    nombre: student.name,
+    matricula: student.id,
+    aciertos: score,
+    total: 10,
+    bonus: bonusCorrect,
+    tiempoSegundos: seconds,
+    respuestas: responses
+  };
+
+  fetch(RESULTS_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain"
+    },
+    body: JSON.stringify(payload)
+  });
+}
   const banks = {
     perfil: [
       {q:"¿Qué convierte mejor una intención de desarrollo en una conducta observable?",a:"Definir qué haré distinto y en qué situación",e:"Una intención se vuelve trabajable cuando se traduce en una acción concreta que puede observarse en una situación real.",o:["Definir qué haré distinto y en qué situación","Describir cómo me gustaría sentirme","Elegir una palabra que me represente","Esperar a que otra persona note el cambio"]},
