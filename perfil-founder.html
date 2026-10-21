@@ -170,6 +170,7 @@ function sendResults(seconds) {
   const payload = {
     nombre: student.name,
     matricula: student.id,
+    correo: student.email,
     aciertos: score,
     total: 10,
     bonus: bonusCorrect,
