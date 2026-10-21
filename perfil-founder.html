@@ -339,7 +339,7 @@ responses.push({
     const seconds=Math.max(0,Math.round((Date.now()-startTime)/1000));
     const min=Math.floor(seconds/60);
     const sec=String(seconds%60).padStart(2,"0");
-
+sendResults(seconds);
     $("resultName").textContent=student.name;
     $("scoreValue").textContent=`${score}/10`;
     $("bonusValue").textContent=bonusCorrect?"✓":"—";
