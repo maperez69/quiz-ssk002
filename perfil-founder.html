@@ -1,5 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
+const RESULTS_URL =
+  "https://script.google.com/macros/s/AKfycbzhNnhKCHquGvykYgYDiBgCi4E3EUvMCWePuU4jfBZ-kAxiC73-YTJ5IK-RYPTYID9-Sw/exec";<!DOCTYPE html>
+function sendResults(seconds) {
+  const payload = {
+    nombre: student.name,
+    matricula: student.id,
+    aciertos: score,
+    total: 10,
+    bonus: bonusCorrect,
+    tiempoSegundos: seconds,
+    respuestas: responses
+  };
+
+  fetch(RESULTS_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain"
+    },
+    body: JSON.stringify(payload)
+  });
+}<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
